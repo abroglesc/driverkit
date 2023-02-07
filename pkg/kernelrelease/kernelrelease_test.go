@@ -195,6 +195,19 @@ func TestFromString(t *testing.T) {
 				FullExtraversion: "-1~deb10u3-amd64",
 			},
 		},
+		"strange Debian version 4": {
+			kernelVersionStr: "4.19+105+deb10u4~bpo9+1",
+			want: KernelRelease{
+				Fullversion: "4.19+105",
+				Version: semver.Version{
+					Major: 4,
+					Minor: 19,
+					Patch: 105,
+				},
+				Extraversion:     "deb10u4",
+				FullExtraversion: "+deb10u4~bpo9+1",
+			},
+		},
 	}
 	for name, tt := range tests {
 		t.Run(name, func(t *testing.T) {
@@ -219,11 +232,7 @@ func TestSupportsModule(t *testing.T) {
 			Architecture: ArchitectureArm64,
 		},
 		{
-			Version:      semver.Version{Major: 3, Minor: 3, Patch: 99},
-			Architecture: ArchitectureArm64,
-		},
-		{
-			Version:      semver.Version{Major: 3, Minor: 3, Patch: 99},
+			Version:      semver.Version{Major: 3, Minor: 15, Patch: 99},
 			Architecture: ArchitectureArm64,
 		},
 	}
@@ -245,11 +254,11 @@ func TestSupportsModule(t *testing.T) {
 			Architecture: ArchitectureAmd64,
 		},
 		{
-			Version:      semver.Version{Major: 3, Minor: 4, Patch: 0},
+			Version:      semver.Version{Major: 3, Minor: 16, Patch: 0},
 			Architecture: ArchitectureArm64,
 		},
 		{
-			Version:      semver.Version{Major: 3, Minor: 4, Patch: 1},
+			Version:      semver.Version{Major: 3, Minor: 16, Patch: 1},
 			Architecture: ArchitectureArm64,
 		},
 		{
